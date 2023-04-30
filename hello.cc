@@ -20,6 +20,7 @@ int main()
              system("cat /proc/"<<*n_char<<"/status");
     }
     else {
+        
         cout << "printed from child process " << getpid()
              << endl;
     }
