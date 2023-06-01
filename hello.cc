@@ -5,7 +5,10 @@ using namespace std;
 int main()
 {
     pid_t c_pid = fork();
-  
+    //Erstellt einen Prozess.
+    int pid = fork();
+    //File path um spaeter informationen auslesen zu koennen.
+    string statm_file="/proc/" + to_string(pid) + "/statm";
     if (c_pid == -1) {
         perror("fork");
         exit(EXIT_FAILURE);
