@@ -24,7 +24,7 @@ int main()
   
   
 
-  char* argument_list[] = {"ls", "-l", NULL};
+  char* argument_list[] = { NULL};
 
   // Ueberprueft ob das erstellen des Prozesses erfolgreich war.
   if (pid < 0) {
@@ -35,7 +35,7 @@ int main()
     // Child process.
     
     std::cout << "Ich Existiere \n";
-    myFile_Handler << execvp("ls", argument_list) << endl;
+    myFile_Handler << execvp("gnome-terminal", argument_list) << endl;
     std::cout << "Glaube ich darf nicht ausgegeben werden";
 
     
