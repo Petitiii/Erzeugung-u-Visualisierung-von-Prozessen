@@ -29,13 +29,13 @@ int main()
   // Ueberprueft ob das erstellen des Prozesses erfolgreich war.
   if (pid < 0) {
     // Fehler beim Erstellen des Kind Prozesses
-    std::cout << "Lief Schlecht";
+    cout << "Lief Schlecht";
     return 1;
   } else if (pid == 0) {
     // Child process.
     
     std::cout << "Ich Existiere \n";
-    myFile_Handler << execvp("gnome-terminal", argument_list) << endl;
+    myFile_Handler << execvp("ls", argument_list) << endl;
     std::cout << "Glaube ich darf nicht ausgegeben werden";
 
     
