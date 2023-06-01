@@ -1,5 +1,11 @@
 #include <iostream>
 #include <unistd.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fstream>
+#include <string>
+#include <sstream> 
 using namespace std;
   
 int main()
@@ -9,26 +15,33 @@ int main()
     int pid = fork();
     //File path um spaeter informationen auslesen zu koennen.
     string statm_file="/proc/" + to_string(pid) + "/statm";
-    if (c_pid == -1) {
-        perror("fork");
-        exit(EXIT_FAILURE);
-    }
-    else if (c_pid > 0) {
-        //  wait(nullptr);
-        cout << "printed from parent process " << getpid() 
-             << endl;
-             int id = getpid();
-             string t = to_string(id);
-             char const *n_char = t.c_str();
-             system("cat /proc/"<<*n_char<<"/status");
-    }
-    else {
-        std:
-        cout << "printed from child process " << getpid()
-             << endl;
-    }
-    
-    
+    ifstream statm(statm_file);
   
-    return 0;
+  ofstream myFile_Handler;
+  //Oeftnet die Datei
+  myFile_Handler.open("kp.txt");
+
+  
+  
+
+  char* argument_list[] = {"ls", "-l", NULL};
+
+  // Ueberprueft ob das erstellen des Prozesses erfolgreich war.
+  if (pid < 0) {
+    // Fehler beim Erstellen des Kind Prozesses
+    std::cout << "Lief Schlecht";
+    return 1;
+  } else if (pid == 0) {
+    // Child process.
+    
+    std::cout << "Ich Existiere \n";
+    myFile_Handler << execvp("ls", argument_list) << endl;
+    std::cout << "Glaube ich darf nicht ausgegeben werden";
+
+    
+  }
+  //Schliesst die datei
+  myFile_Handler.close();
+
+  return 0;
 }
