@@ -15,7 +15,7 @@ int main()
     int pid = fork();
     //File path um spaeter informationen auslesen zu koennen.
     string statm_file="/proc/" + to_string(pid) + "/statm";
-    ifstream statm(statm_file);
+    
   
   ofstream myFile_Handler;
   //Oeftnet die Datei
@@ -34,13 +34,17 @@ int main()
   } else if (pid == 0) {
     // Child process.
     
-    std::cout << "Ich Existiere \n";
-    myFile_Handler << execvp("ls", argument_list) << endl;
+    std::cout << "Ich Existiere";
+    myFile_Handler << execvp("gnome-terminal", argument_list) << endl;
     std::cout << "Glaube ich darf nicht ausgegeben werden";
 
     
   }
   //Schliesst die datei
+  ifstream statm(statm_file);
+  int size;
+  statm >> size;
+  myFile_Handler <<"Size: "<<size <<"lol";
   myFile_Handler.close();
 
   return 0;
