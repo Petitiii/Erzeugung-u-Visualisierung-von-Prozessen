@@ -38,6 +38,7 @@ void readStatus(int type)
     file.open("ppid.txt");
   }else{
   file.open("kp.txt");
+  
   }
   if (file.is_open())
   {
