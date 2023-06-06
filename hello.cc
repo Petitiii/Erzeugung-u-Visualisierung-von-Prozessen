@@ -17,7 +17,7 @@ int main()
   //File path um spaeter informationen auslesen zu koennen.
   string statm_file="/proc/" + to_string(pid) + "/statm";
   writeStatus(pid);
-    
+    tesst
   
     
   
