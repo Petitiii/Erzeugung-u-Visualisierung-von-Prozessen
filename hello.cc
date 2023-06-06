@@ -17,7 +17,8 @@ int main()
   //File path um spaeter informationen auslesen zu koennen.
   string statm_file="/proc/" + to_string(pid) + "/statm";
   writeStatus(pid);
-    tesst
+  readStatus();
+    
   
     
   
@@ -64,3 +65,19 @@ void writeStatus(int processid){
       myFile_Handler << line << endl;
     }
   }
+  void readStatus(){
+    std::ifstream file;
+    std::string line;
+    file.open("kp.txt");
+    if(file.is_open()) {
+      while(std::getline(file, line)){
+        std::cout<< line<< std::endl;
+      }
+      file.close();
+    }
+    else{
+      std::cerr<< "Fehler beim öffnen der Datei";
+    }
+
+  }
+
