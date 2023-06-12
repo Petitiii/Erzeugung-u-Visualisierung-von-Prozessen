@@ -34,6 +34,9 @@ void writeStatus(int processid, int type)
 }
 void readStatus(int type)
 {
+  // Array um festzulegen welche Zeilen nur angezeigt werden sollen
+  int ausgabe[5] = {1,4,6,7,9};
+  int linecounter = 0;
   std::ifstream file;
   std::string line;
     if(type == Parent){
@@ -46,7 +49,9 @@ void readStatus(int type)
   {
     while (std::getline(file, line))
     {
-      std::cout << line << std::endl;
+      linecounter++;
+      if(linecounter == ausgabe)
+        std::cout << line << std::endl;
     }
     file.close();
   }
