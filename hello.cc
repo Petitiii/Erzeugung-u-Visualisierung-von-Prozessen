@@ -7,12 +7,14 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <vector>
 using namespace std;
 ofstream myFile_Handler;
 enum{
   Parent = 0,
   child
 };
+ vector<int> pidArray;
 void writeStatus(int processid, int type)
 {
   std::ofstream file;
@@ -59,6 +61,7 @@ int main()
 
   // Erstellt einen Prozess.
   int currpid = getpid();
+  pidArray.push_back (currpid);
   
   // File path um spaeter informationen auslesen zu koennen.
   //string statm_file = "/proc/" + to_string(pid) + "/statm";
@@ -69,13 +72,15 @@ int main()
  
 
   char *argument_list[] = {NULL};
+  const char *args =NULL;
+
 
   // Ueberprueft ob das erstellen des Prozesses erfolgreich war.
 
   if (fork() == -1){
-    sleep(1);
+    sleep(2);
     std::cout << "Ich Existiere";
-    execvp("gnome-terminal", argument_list);
+    execl("./helloworld",args,(char *)NULL);
     std::cout << "Das darf nicht ausgegeben werden, wenn alles gut lief";
   }
   
@@ -84,12 +89,15 @@ int main()
   //int childpid = getpid();
   //std::cout << "childpid:" << childpid << "\n";
   int pid = getpid();
+  pidArray.push_back (pid);
   if(currpid == pid){
   std::cout << "parentid:" << pid << "\n"; 
   writeStatus(pid, Parent);
+  readStatus(Parent);
   }else{
   std::cout << "childpid:" << pid << "\n"; 
   writeStatus(pid, child);
+  readStatus(child);
   
   }
   
