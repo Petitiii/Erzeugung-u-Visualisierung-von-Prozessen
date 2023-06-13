@@ -1,33 +1,33 @@
 Name:	hello
 Umask:	0002
 State:	R (running)
-Tgid:	6336
+Tgid:	5405
 Ngid:	0
-Pid:	6336
-PPid:	6276
+Pid:	5405
+PPid:	5383
 TracerPid:	0
 Uid:	1000	1000	1000	1000
 Gid:	1000	1000	1000	1000
 FDSize:	256
 Groups:	27 1000 
-NStgid:	6336
-NSpid:	6336
-NSpgid:	6336
-NSsid:	6276
+NStgid:	5405
+NSpid:	5405
+NSpgid:	5405
+NSsid:	5383
 VmPeak:	    6056 kB
 VmSize:	    6056 kB
 VmLck:	       0 kB
 VmPin:	       0 kB
 VmHWM:	    1904 kB
 VmRSS:	    1904 kB
-RssAnon:	     176 kB
-RssFile:	    1728 kB
+RssAnon:	     172 kB
+RssFile:	    1732 kB
 RssShmem:	       0 kB
 VmData:	     260 kB
 VmStk:	     136 kB
 VmExe:	       8 kB
 VmLib:	    3472 kB
-VmPTE:	      52 kB
+VmPTE:	      48 kB
 VmSwap:	       0 kB
 HugetlbPages:	       0 kB
 CoreDumping:	0
@@ -47,11 +47,11 @@ CapAmb:	0000000000000000
 NoNewPrivs:	0
 Seccomp:	0
 Seccomp_filters:	0
-Speculation_Store_Bypass:	not vulnerable
+Speculation_Store_Bypass:	vulnerable
 SpeculationIndirectBranch:	always enabled
 Cpus_allowed:	f
 Cpus_allowed_list:	0-3
 Mems_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001
 Mems_allowed_list:	0
 voluntary_ctxt_switches:	0
-nonvoluntary_ctxt_switches:	0
+nonvoluntary_ctxt_switches:	3

@@ -15,6 +15,42 @@ enum{
   child
 };
  vector<int> pidArray;
+
+stringstream readstat(string path)
+{
+  stringstream infos;
+  
+  return 
+}
+string procReq(pid_t pid, string info)
+{
+    string path = "/proc/" + to_string(pid) + "/" + info;
+    return readFile(path);
+}
+vector<vector<string>> getStatData(vector<pid_t> *prozesse)
+  {
+    
+    vector<vector<string>> stats;
+    string procPIDstat;
+    for (pid_t pid : *prozesse)
+    {
+        procPIDstat = procReq(pid, "stat"); // info von /proc/[pid]/stat
+
+        int i = 0, words = 44;
+        vector<string> statArray(words);
+        stringstream ssin(procPIDstat);
+        while (ssin.good() && i < words)
+        {
+            ssin >> statArray[i];
+            i++;
+        }
+        stats.push_back(statArray);
+    }
+    return stats;
+  }
+
+
+
 void writeStatus(int processid, int type)
 {
   std::ofstream file;
@@ -49,9 +85,7 @@ void readStatus(int type)
   {
     while (std::getline(file, line))
     {
-      linecounter++;
-      if(linecounter == ausgabe)
-        std::cout << line << std::endl;
+      cout << line << std::endl;
     }
     file.close();
   }
