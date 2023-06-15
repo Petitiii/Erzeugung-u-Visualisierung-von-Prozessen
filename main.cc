@@ -44,9 +44,9 @@ vector<vector<string>> getStatData(vector<pid_t> *prozesse)
       ssin >> stat[i];
       i++;
     }
+    cout<< stat[i]<< endl;
     stats.push_back(stat);
   }
-  cout << stats[1]<< endl;
   return stats;
 }
 
@@ -103,13 +103,13 @@ void readStatus(int type)
   }
 }
 
-void helloWorld(){
+void testProzess(){
   if (fork() == -1)
   {
-    sleep(2);
-    std::cout << "Ich Existiere";
-    execl("./helloworld", args, (char *)NULL);
-    std::cout << "Das darf nicht ausgegeben werden, wenn alles gut lief";
+    cout<< "lul"<<endl;
+    cout<< "Ich Existiere"<<endl;;
+    execl("./TestProzess", args, (char *)NULL);
+   
 
   }
   pid_t pid = getpid();
@@ -120,8 +120,9 @@ void helloWorld(){
 int main()
 {
 
-  helloWorld();
-  getStatData(pidArray);
+  testProzess();
+  
+  
 
   // Erstellt einen Prozess.
   int currpid = getpid();
@@ -152,25 +153,32 @@ int main()
   // std::cout << "childpid:" << childpid << "\n";
   int pid = getpid();
   pidArray.push_back(pid);
+  int size;
+  string statm_file = "/proc/" + to_string(pid) + "/statm";
+  // Schliesst die datei
+  ifstream statm(statm_file);
   if (currpid == pid)
   {
+    
     std::cout << "parentid:" << pid << "\n";
     writeStatus(pid, Parent);
-    readStatus(Parent);
+   // readStatus(Parent);
+   statm >> size;
+   cout<< size<< endl;
   }
   else
   {
     std::cout << "childpid:" << pid << "\n";
     writeStatus(pid, child);
-    readStatus(child);
+    //readStatus(child);
+    statm >> size;
+    cout<< size<< endl;
   }
 
-  string statm_file = "/proc/" + to_string(pid) + "/statm";
-  // Schliesst die datei
-  ifstream statm(statm_file);
+  
 
-  int size;
-  statm >> size;
+  
+  getStatData(pidArray);
 
   return 0;
 }
