@@ -8,6 +8,10 @@
 #include <string>
 #include <sstream>
 #include <vector>
+
+//maps fehlt noch
+//interface
+//
 using namespace std;
 ofstream myFile_Handler;
 const char *args = NULL;
@@ -26,44 +30,41 @@ string readstat(string procpath)
   getline(status, line);
   return line;
 }
-vector<vector<string>> getStatData(vector<pid_t> *prozesse)
+vector<vector<string>> getStatData(vector<pid_t> prozesse)
 {
 
   vector<vector<string>> stats;
-  string procPIDstat;
-  for (pid_t pid : *prozesse)
+  string procStat;
+  for (pid_t pid : prozesse)
   {
     string path = "/proc/" + to_string(pid) + "/stat";
     string procstat = readstat(path); // info von /proc/[pid]/stat
 
     int i = 0, data = 44;
     vector<string> stat(data);
-    stringstream ssin(procPIDstat);
+    stringstream ssin(procStat);
     while (ssin.good() && i < data)
     {
+
       ssin >> stat[i];
       i++;
     }
-    cout<< stat[i]<< endl;
+
     stats.push_back(stat);
   }
   return stats;
 }
-
-
-
-
 
 void writeStatus(int processid, int type)
 {
   std::ofstream file;
   if (type == Parent)
   {
-    file.open("ppid.txt");
+    file.open("child.txt");
   }
   else
   {
-    file.open("kp.txt");
+    file.open("parent.txt");
   }
 
   string status_file = "/proc/" + to_string(processid) + "/status";
@@ -83,62 +84,47 @@ void readStatus(int type)
   std::string line;
   if (type == Parent)
   {
-    file.open("ppid.txt");
+    file.open("child.txt");
   }
   else
   {
-    file.open("kp.txt");
+    file.open("parent.txt");
   }
   if (file.is_open())
   {
-    while (std::getline(file, line))
+    while (getline(file, line))
     {
-      cout << line << std::endl;
+      cout << line << endl;
     }
     file.close();
   }
   else
   {
-    std::cerr << "Fehler beim öffnen der Datei";
+    cerr << "Fehler beim öffnen der Datei";
   }
 }
 
-void testProzess(){
-  if (fork() == -1)
+void testProzess()
+{
+  if (fork() == 0)
   {
-    cout<< "lul"<<endl;
-    cout<< "Ich Existiere"<<endl;;
+    wait(NULL);
+    cout << "lul" << endl;
+    cout << "Ich Existiere" << endl;
     execl("./TestProzess", args, (char *)NULL);
-   
-
   }
   pid_t pid = getpid();
   pidArray.push_back(pid);
 }
- 
 
 int main()
 {
-
   testProzess();
-  
-  
-
   // Erstellt einen Prozess.
-  int currpid = getpid();
+  pid_t currpid = getpid();
   pidArray.push_back(currpid);
 
-  // File path um spaeter informationen auslesen zu koennen.
-  // string statm_file = "/proc/" + to_string(pid) + "/statm";
-  // Schreibt in die Datei
-  // writeStatus(pid);
-
-  // Oeftnet die Datei
-
   char *argument_list[] = {NULL};
-  
-
-  // Ueberprueft ob das erstellen des Prozesses erfolgreich war.
 
   if (fork() == -1)
   {
@@ -148,36 +134,13 @@ int main()
     std::cout << "Das darf nicht ausgegeben werden, wenn alles gut lief";
   }
 
-  // Child process.
-  // int childpid = getpid();
-  // std::cout << "childpid:" << childpid << "\n";
-  int pid = getpid();
+  pid_t pid = getpid();
   pidArray.push_back(pid);
   int size;
   string statm_file = "/proc/" + to_string(pid) + "/statm";
   // Schliesst die datei
   ifstream statm(statm_file);
-  if (currpid == pid)
-  {
-    
-    std::cout << "parentid:" << pid << "\n";
-    writeStatus(pid, Parent);
-   // readStatus(Parent);
-   statm >> size;
-   cout<< size<< endl;
-  }
-  else
-  {
-    std::cout << "childpid:" << pid << "\n";
-    writeStatus(pid, child);
-    //readStatus(child);
-    statm >> size;
-    cout<< size<< endl;
-  }
 
-  
-
-  
   getStatData(pidArray);
 
   return 0;

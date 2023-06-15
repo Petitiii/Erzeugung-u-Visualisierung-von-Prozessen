@@ -1,33 +1,33 @@
 Name:	main
 Umask:	0002
 State:	R (running)
-Tgid:	4913
+Tgid:	4878
 Ngid:	0
-Pid:	4913
-PPid:	4177
+Pid:	4878
+PPid:	4007
 TracerPid:	0
 Uid:	1000	1000	1000	1000
 Gid:	1000	1000	1000	1000
-FDSize:	128
+FDSize:	256
 Groups:	27 1000 
-NStgid:	4913
-NSpid:	4913
-NSpgid:	4913
-NSsid:	4177
+NStgid:	4878
+NSpid:	4878
+NSpgid:	4878
+NSsid:	4007
 VmPeak:	    6076 kB
 VmSize:	    6076 kB
 VmLck:	       0 kB
 VmPin:	       0 kB
-VmHWM:	    1940 kB
-VmRSS:	    1940 kB
-RssAnon:	     172 kB
-RssFile:	    1768 kB
+VmHWM:	    1916 kB
+VmRSS:	    1916 kB
+RssAnon:	     180 kB
+RssFile:	    1736 kB
 RssShmem:	       0 kB
 VmData:	     260 kB
 VmStk:	     136 kB
 VmExe:	      20 kB
 VmLib:	    3472 kB
-VmPTE:	      52 kB
+VmPTE:	      48 kB
 VmSwap:	       0 kB
 HugetlbPages:	       0 kB
 CoreDumping:	0
@@ -53,5 +53,5 @@ Cpus_allowed:	f
 Cpus_allowed_list:	0-3
 Mems_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001
 Mems_allowed_list:	0
-voluntary_ctxt_switches:	1
-nonvoluntary_ctxt_switches:	0
+voluntary_ctxt_switches:	0
+nonvoluntary_ctxt_switches:	3
