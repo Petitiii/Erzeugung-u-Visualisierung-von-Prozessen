@@ -6,6 +6,5 @@
 int main()
 {
     std::cout <<"Hallo ich bin ein neuer Prozess"<<std::endl;
-    std::cout<< "Prozess Info      \t\t\t        Speicher         \nPID\tName\tPPID\tUID\tGID\tRechte\t\tsize\tresident\tdata\n";
     return 0;
 }
