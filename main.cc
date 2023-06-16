@@ -8,7 +8,6 @@
 #include <string>
 #include <sstream>
 #include <vector>
-#include <unistd.h> //sleep
 
 // maps fehlt noch
 // interface
@@ -22,17 +21,6 @@ enum
   child
 };
 vector<pid_t> pidArray;
-void testProzess()
-{
-  pid_t neuPr = fork();
-  if (neuPr == 0)
-  {
-    execl("./TestProzess", args, (char *)NULL);
-  }
-  //pid_t pidneu = getpid();
-  pidArray.push_back(neuPr);
-  
-}
 
 string readstat(string procpath)
 {
@@ -96,7 +84,7 @@ string printinfos()
   vector<vector<string>> stat = getStatData();
   vector<vector<string>> map = mapsData();
 
-  string alleInfos = "Prozess Info\t\t\t\t\t\tSpeicher         \nPID\tName\t\tPPID\tUID\tGID\tRechte\tsize\n";
+  string alleInfos = "Prozess Info      \t\t\t\t        Speicher         \nPID\tName\tPPID\tUID\tGID\tRechte\t\tsize\n";
   vector<string> size;
   for(pid_t p : pidArray){
   string statmvalues;
@@ -112,7 +100,7 @@ string printinfos()
     // Bei kurzem Namen Tab hinzufügen
     stat[i][1].length() < 8 ? stat[i][1] += "\t" : "";
 
-    alleInfos += stat[i][0] + "\t" + stat[i][1] + "\t" + to_string(getpid())  + "\t" + to_string(getuid()) + "\t" + stat[i][5] + "\t" + map[i][1] + "\t" + size[i] + "\n";
+    alleInfos += stat[i][0] + "\t" + stat[i][1] + stat[i][5]  + "\t"+ "\t" + stat[i][9] + "\t" + map[i][1] + "\t\t" +size[i]+"\n";
   }
   return alleInfos;
 }
@@ -166,16 +154,26 @@ void readStatus(int type)
   }
 }
 
-
+void testProzess()
+{
+  if (fork() == 0)
+  {
+    wait(NULL);
+    //execl(, args, (char *)NULL);
+  }
+  pid_t pid = getpid();
+  pidArray.push_back(pid);
+}
+void testprozess(string path){
+  //const char *path = path.str();
+}
 
 int main()
 {
-  pidArray.push_back(getpid());
-  writeStatus(getpid(),Parent);
+  pid_t currpid = getpid();
+  pidArray.push_back(currpid);
   testProzess();
-  sleep(1);
   cout<<printinfos();
-  
 
   return 0;
 }

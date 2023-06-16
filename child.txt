@@ -1,39 +1,39 @@
 Name:	main
 Umask:	0002
 State:	R (running)
-Tgid:	8667
+Tgid:	43108
 Ngid:	0
-Pid:	8667
-PPid:	5798
-TracerPid:	0
+Pid:	43108
+PPid:	43102
+TracerPid:	43102
 Uid:	1000	1000	1000	1000
 Gid:	1000	1000	1000	1000
-FDSize:	256
+FDSize:	128
 Groups:	27 1000 
-NStgid:	8667
-NSpid:	8667
-NSpgid:	8667
-NSsid:	5798
+NStgid:	43108
+NSpid:	43108
+NSpgid:	43108
+NSsid:	43108
 VmPeak:	    6084 kB
 VmSize:	    6084 kB
 VmLck:	       0 kB
 VmPin:	       0 kB
-VmHWM:	    1916 kB
-VmRSS:	    1916 kB
-RssAnon:	     176 kB
-RssFile:	    1740 kB
+VmHWM:	    2268 kB
+VmRSS:	    2268 kB
+RssAnon:	     184 kB
+RssFile:	    2084 kB
 RssShmem:	       0 kB
 VmData:	     260 kB
 VmStk:	     136 kB
 VmExe:	      24 kB
 VmLib:	    3472 kB
-VmPTE:	      52 kB
+VmPTE:	      40 kB
 VmSwap:	       0 kB
 HugetlbPages:	       0 kB
 CoreDumping:	0
 THP_enabled:	1
 Threads:	1
-SigQ:	0/31436
+SigQ:	0/15190
 SigPnd:	0000000000000000
 ShdPnd:	0000000000000000
 SigBlk:	0000000000000000
@@ -47,11 +47,11 @@ CapAmb:	0000000000000000
 NoNewPrivs:	0
 Seccomp:	0
 Seccomp_filters:	0
-Speculation_Store_Bypass:	vulnerable
+Speculation_Store_Bypass:	not vulnerable
 SpeculationIndirectBranch:	always enabled
-Cpus_allowed:	f
-Cpus_allowed_list:	0-3
+Cpus_allowed:	3
+Cpus_allowed_list:	0-1
 Mems_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001
 Mems_allowed_list:	0
-voluntary_ctxt_switches:	0
-nonvoluntary_ctxt_switches:	0
+voluntary_ctxt_switches:	7
+nonvoluntary_ctxt_switches:	1
