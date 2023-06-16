@@ -105,6 +105,7 @@ string printinfos()
   ifstream statm(statm_file);
   statm>> statmvalues;
   size.push_back(statmvalues);
+  
   }
 
   for (size_t i = 0; i < stat.size(); i++)
