@@ -34,7 +34,7 @@ vector<vector<string>> getStatData()
 {
 
   vector<vector<string>> stats;
-  string procStat;
+  //string procStat;
   for (pid_t pid : pidArray)
   {
     string path = "/proc/" + to_string(pid) + "/stat";
@@ -52,19 +52,57 @@ vector<vector<string>> getStatData()
 
     stats.push_back(stat);
   }
-
-  for (auto stat : stats)
-  {
-    for (auto a : stat)
-    {
-      cout << a << endl;
-    }
-  }
   return stats;
 }
+vector<vector<string>> mapsData()
+{
 
-string printinfos(){
+  vector<vector<string>> maps;
+  for (pid_t pid : pidArray)
+  {
+    string path = "/proc/" + to_string(pid) + "/maps";
+    string mapdata = readstat(path); // info von /proc/[pid]/maps
+
+    int i = 0, infos = 6;
+    vector<string> map(infos);
+    stringstream ssin(mapdata);
+    while (ssin.good() && i < infos)
+    {
+
+      ssin >> map[i];
+      i++;
+    }
+
+    maps.push_back(map);
+  }
+  return maps;
+}
+
+string printinfos()
+{
+
   vector<vector<string>> stat = getStatData();
+  vector<vector<string>> map = mapsData();
+
+  string alleInfos = "Prozess Info      \t\t\t\t        Speicher         \nPID\tName\tPPID\tUID\tGID\tRechte\t\tsize\n";
+  vector<string> size;
+  for(pid_t p : pidArray){
+  string statmvalues;
+  string statm_file = "/proc/" + to_string(p) + "/statm";
+
+  ifstream statm(statm_file);
+  statm>> statmvalues;
+  size.push_back(statmvalues);
+  }
+
+  for (size_t i = 0; i < stat.size(); i++)
+  {
+    // Bei kurzem Namen Tab hinzufügen
+    stat[i][1].length() < 8 ? stat[i][1] += "\t" : "";
+
+    alleInfos += stat[i][0] + "\t" + stat[i][1] + stat[i][5]  + "\t"+ "\t" + stat[i][9] + "\t" + map[i][1] + "\t\t" +size[i]+"\n";
+  }
+  return alleInfos;
 }
 
 void writeStatus(int processid, int type)
@@ -121,8 +159,6 @@ void testProzess()
   if (fork() == 0)
   {
     wait(NULL);
-    cout << "lul" << endl;
-    cout << "Ich Existiere" << endl;
     execl("./TestProzess", args, (char *)NULL);
   }
   pid_t pid = getpid();
@@ -131,18 +167,10 @@ void testProzess()
 
 int main()
 {
-  testProzess();
-
-  // Erstellt einen Prozess.
   pid_t currpid = getpid();
   pidArray.push_back(currpid);
-  //cout <<readstat("/proc/" + to_string(currpid) + "/stat");
-  getStatData();
-
-  int size;
-  // string statm_file = "/proc/" + to_string(pid) + "/statm";
-  //  Schliesst die datei
-  // ifstream statm(statm_file);
+  testProzess();
+  cout<<printinfos();
 
   return 0;
 }
