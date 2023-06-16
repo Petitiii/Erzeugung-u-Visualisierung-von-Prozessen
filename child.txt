@@ -1,31 +1,31 @@
 Name:	main
 Umask:	0002
 State:	R (running)
-Tgid:	9967
+Tgid:	3558
 Ngid:	0
-Pid:	9967
-PPid:	9484
+Pid:	3558
+PPid:	3524
 TracerPid:	0
 Uid:	1000	1000	1000	1000
 Gid:	1000	1000	1000	1000
 FDSize:	256
 Groups:	27 1000 
-NStgid:	9967
-NSpid:	9967
-NSpgid:	9967
-NSsid:	9484
-VmPeak:	    6084 kB
-VmSize:	    6084 kB
+NStgid:	3558
+NSpid:	3558
+NSpgid:	3558
+NSsid:	3524
+VmPeak:	    6088 kB
+VmSize:	    6088 kB
 VmLck:	       0 kB
 VmPin:	       0 kB
-VmHWM:	    1912 kB
-VmRSS:	    1912 kB
-RssAnon:	     172 kB
-RssFile:	    1740 kB
+VmHWM:	    1916 kB
+VmRSS:	    1916 kB
+RssAnon:	     180 kB
+RssFile:	    1736 kB
 RssShmem:	       0 kB
 VmData:	     260 kB
 VmStk:	     136 kB
-VmExe:	      24 kB
+VmExe:	      28 kB
 VmLib:	    3472 kB
 VmPTE:	      52 kB
 VmSwap:	       0 kB

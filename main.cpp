@@ -118,9 +118,17 @@ string printinfos()
   return alleInfos;
 }
 
+void writeLog(string info){
+  ofstream file;
+  file.open("log.txt");
+  file<<info<<endl;
+
+}
+
+
 void writeStatus(int processid, int type)
 {
-  std::ofstream file;
+  ofstream file;
   if (type == Parent)
   {
     file.open("child.txt");
@@ -176,6 +184,7 @@ int main()
   testProzess();
   sleep(1);
   cout<<printinfos();
+  writeLog(printinfos());
   
 
   return 0;
