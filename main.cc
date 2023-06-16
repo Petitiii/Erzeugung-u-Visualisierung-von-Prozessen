@@ -9,8 +9,8 @@
 #include <sstream>
 #include <vector>
 
-//maps fehlt noch
-//interface
+// maps fehlt noch
+// interface
 //
 using namespace std;
 ofstream myFile_Handler;
@@ -30,19 +30,19 @@ string readstat(string procpath)
   getline(status, line);
   return line;
 }
-vector<vector<string>> getStatData(vector<pid_t> prozesse)
+vector<vector<string>> getStatData()
 {
 
   vector<vector<string>> stats;
   string procStat;
-  for (pid_t pid : prozesse)
+  for (pid_t pid : pidArray)
   {
     string path = "/proc/" + to_string(pid) + "/stat";
     string procstat = readstat(path); // info von /proc/[pid]/stat
 
     int i = 0, data = 44;
     vector<string> stat(data);
-    stringstream ssin(procStat);
+    stringstream ssin(procstat);
     while (ssin.good() && i < data)
     {
 
@@ -51,6 +51,14 @@ vector<vector<string>> getStatData(vector<pid_t> prozesse)
     }
 
     stats.push_back(stat);
+  }
+
+  for (auto stat : stats)
+  {
+    for (auto a : stat)
+    {
+      cout << a << endl;
+    }
   }
   return stats;
 }
@@ -120,28 +128,17 @@ void testProzess()
 int main()
 {
   testProzess();
+
   // Erstellt einen Prozess.
   pid_t currpid = getpid();
   pidArray.push_back(currpid);
+  //cout <<readstat("/proc/" + to_string(currpid) + "/stat");
+  getStatData();
 
-  char *argument_list[] = {NULL};
-
-  if (fork() == -1)
-  {
-    sleep(2);
-    std::cout << "Ich Existiere";
-    execl("./helloworld", args, (char *)NULL);
-    std::cout << "Das darf nicht ausgegeben werden, wenn alles gut lief";
-  }
-
-  pid_t pid = getpid();
-  pidArray.push_back(pid);
   int size;
-  string statm_file = "/proc/" + to_string(pid) + "/statm";
-  // Schliesst die datei
-  ifstream statm(statm_file);
-
-  getStatData(pidArray);
+  // string statm_file = "/proc/" + to_string(pid) + "/statm";
+  //  Schliesst die datei
+  // ifstream statm(statm_file);
 
   return 0;
 }
