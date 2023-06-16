@@ -63,6 +63,10 @@ vector<vector<string>> getStatData()
   return stats;
 }
 
+string printinfos(){
+  vector<vector<string>> stat = getStatData();
+}
+
 void writeStatus(int processid, int type)
 {
   std::ofstream file;
