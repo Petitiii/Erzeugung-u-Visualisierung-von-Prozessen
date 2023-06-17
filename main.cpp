@@ -7,6 +7,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <signal.h>
 #include <vector>
 #include <unistd.h> //sleep
 
@@ -28,6 +29,17 @@ void testProzess()
   if (neuPr == 0)
   {
     execl("./TestProzess", args, (char *)NULL);
+  }
+  //pid_t pidneu = getpid();
+  pidArray.push_back(neuPr);
+  
+}
+void neuesTerminal()
+{
+  pid_t neuPr = fork();
+  if (neuPr == 0)
+  {
+    execl("gnome-Terminal", args, (char *)NULL);
   }
   //pid_t pidneu = getpid();
   pidArray.push_back(neuPr);
@@ -120,47 +132,22 @@ string printinfos()
 
 void writeLog(string info){
   ofstream file;
-  file.open("log.txt");
+  time_t now = time(0);
+   
+   
+  char* dt = ctime(&now);
+
+  file.open("log.txt", fstream::app);
+  file<< dt<<endl;
   file<<info<<endl;
 
 }
 
-
-void writeStatus(int processid, int type)
+void readLog()
 {
-  ofstream file;
-  if (type == Parent)
-  {
-    file.open("child.txt");
-  }
-  else
-  {
-    file.open("parent.txt");
-  }
-
-  string status_file = "/proc/" + to_string(processid) + "/status";
-  ifstream status(status_file);
-  string line;
-  while (getline(status, line))
-  {
-    file << line << endl;
-  }
-}
-void readStatus(int type)
-{
-  // Array um festzulegen welche Zeilen nur angezeigt werden sollen
-  int ausgabe[5] = {1, 4, 6, 7, 9};
-  int linecounter = 0;
   std::ifstream file;
   std::string line;
-  if (type == Parent)
-  {
-    file.open("child.txt");
-  }
-  else
-  {
-    file.open("parent.txt");
-  }
+  file.open("log.txt");
   if (file.is_open())
   {
     while (getline(file, line))
@@ -174,18 +161,53 @@ void readStatus(int type)
     cerr << "Fehler beim öffnen der Datei";
   }
 }
+void killProzess(){
+  for(pid_t eintraege: pidArray){
+  kill(eintraege,SIGTERM);
+  }
+  
+}
 
-
+void auswahlmenu(){
+  string info="1: Neuen Prozess erzeugen \n2: Prozessinformationen ausgeben \n3: LogFile ausgeben \n4: Alle Prozesse beenden";
+  cout<<info<<endl;
+  int auswahl;
+  cin>>auswahl;
+  switch (auswahl)
+  {
+  case 1:
+    testProzess();
+    sleep(2);
+    auswahlmenu();
+  case 2:
+    cout<<printinfos();
+    writeLog(printinfos()); 
+    sleep(2);
+    auswahlmenu();
+  case 3:
+    readLog(); 
+    sleep(2);
+    auswahlmenu();
+  case 4:
+    killProzess(); 
+  
+  
+  default:
+  cout<<"Falsche Taste"<<endl;
+  break;
+  }
+}
 
 int main()
 {
-  pidArray.push_back(getpid());
-  writeStatus(getpid(),Parent);
-  testProzess();
-  sleep(1);
-  cout<<printinfos();
-  writeLog(printinfos());
+  pidArray.push_back(getpid());// das ist damit die Prozess id von dem standart prozess anfangs gespeichert wird
+  cout<<"Hallo in unserem wunderbaren Interface :D \n1Druecken sie die angezeigten Zahlen um unterschiedliche Aktionen auszufuehren"<<endl;
+  auswahlmenu();
   
+  
+  
+  
+   
 
   return 0;
 }

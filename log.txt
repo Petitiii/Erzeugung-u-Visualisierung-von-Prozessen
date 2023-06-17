@@ -1,5 +1,42 @@
+Sat Jun 17 22:38:25 2023
+
 Prozess Info						Speicher         
 PID	Name		PPID	UID	GID	Rechte	size
-3558	(main)		3558	1000	3524	r--p	1522
-3559	(TestProzess)	3558	1000	3524		0
+4290	(main)		4290	1000	4268	r--p	1521
+4291	(TestProzess)	4290	1000	4268		0
+
+Sat Jun 17 22:38:56 2023
+Prozess Info						Speicher         
+PID	Name		PPID	UID	GID	Rechte	size
+5318	(main)		5318	1000	4268	r--p	1522
+5327	(TestProzess)	5318	1000	4268		0
+5328	(TestProzess)	5318	1000	4268		0
+5383	(TestProzess)	5318	1000	4268		0
+
+Sat Jun 17 23:10:23 2023
+
+Prozess Info						Speicher         
+PID	Name		PPID	UID	GID	Rechte	size
+5318	(main)		5318	1000	4268	r--p	1522
+5327	(TestProzess)	5318	1000	4268		0
+5328	(TestProzess)	5318	1000	4268		0
+5383	(TestProzess)	5318	1000	4268		0
+
+Sat Jun 17 23:10:27 2023
+
+Prozess Info						Speicher         
+PID	Name		PPID	UID	GID	Rechte	size
+5318	(main)		5318	1000	4268	r--p	1522
+5327	(TestProzess)	5318	1000	4268		0
+5328	(TestProzess)	5318	1000	4268		0
+5383	(TestProzess)	5318	1000	4268		0
+
+Sat Jun 17 23:10:31 2023
+
+Prozess Info						Speicher         
+PID	Name		PPID	UID	GID	Rechte	size
+5318	(main)		5318	1000	4268	r--p	1522
+5327	(TestProzess)	5318	1000	4268		0
+5328	(TestProzess)	5318	1000	4268		0
+5383	(TestProzess)	5318	1000	4268		0
 

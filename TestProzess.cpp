@@ -5,6 +5,6 @@
 #include <sys/wait.h>
 int main()
 {
-    std::cout <<"Hallo ich bin ein neuer Prozess"<<std::endl;
+    std::cout <<"Hey alles hat super geklappt,ich bin ein neuer Prozess"<<std::endl;
     return 0;
 }
