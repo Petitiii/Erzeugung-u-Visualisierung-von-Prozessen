@@ -108,24 +108,28 @@ string printinfos()
   vector<vector<string>> stat = getStatData();
   vector<vector<string>> map = mapsData();
 
-  string alleInfos = "Prozess Info\t\t\t\t\t\tSpeicher         \nPID\tName\t\tPPID\tUID\tGID\tRechte\tsize\n";
+  string alleInfos = "Prozess Info\t\t\t\t\t\tSpeicher         \nPID\tName\t\tPPID\tUID\tGID\tRechte\tSize\tRAM-Ausnutzung\n";
   vector<string> size;
+  vector<string> ram;
   for(pid_t p : pidArray){
   string statmvalues;
+  string ramusage;
   string statm_file = "/proc/" + to_string(p) + "/statm";
 
   ifstream statm(statm_file);
-  statm>> statmvalues;
+  statm>> statmvalues>>ramusage;
   size.push_back(statmvalues);
+  ram.push_back(ramusage);
   
   }
+  
 
   for (size_t i = 0; i < stat.size(); i++)
   {
     // Bei kurzem Namen Tab hinzufügen
     stat[i][1].length() < 8 ? stat[i][1] += "\t" : "";
 
-    alleInfos += stat[i][0] + "\t" + stat[i][1] + "\t" + to_string(getpid())  + "\t" + to_string(getuid()) + "\t" + stat[i][5] + "\t" + map[i][1] + "\t" + size[i] + "\n";
+    alleInfos += stat[i][0] + "\t" + stat[i][1] + "\t" + to_string(getpid())  + "\t" + to_string(getuid()) + "\t" + stat[i][5] + "\t" + map[i][1] + "\t" + size[i]+ "\t" + ram[i] + "\n";
   }
   return alleInfos;
 }
@@ -201,7 +205,7 @@ void auswahlmenu(){
 int main()
 {
   pidArray.push_back(getpid());// das ist damit die Prozess id von dem standart prozess anfangs gespeichert wird
-  cout<<"Hallo in unserem wunderbaren Interface :D \n1Druecken sie die angezeigten Zahlen um unterschiedliche Aktionen auszufuehren"<<endl;
+  cout<<"Hallo in unserem wunderbaren Interface :D \nDruecken sie die angezeigten Zahlen um unterschiedliche Aktionen auszufuehren"<<endl;
   auswahlmenu();
   
   
