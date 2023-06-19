@@ -47,3 +47,10 @@ PID	Name		PPID	UID	GID	Rechte	size	RAM-Ausnutzung
 3978	(main)		3978	1000	3936	r--p	1522	509
 4007	(TestProzess)	3978	1000	3936		0	0
 
+Mon Jun 19 14:24:03 2023
+
+Prozess Info						Speicher         
+PID	Name		PPID	UID	GID	Rechte	Size	RAM-Ausnutzung
+4295	(main)		4295	1000	4253	r--p	1522	509
+4409	(TestProzess)	4295	1000	4253		0	0
+
