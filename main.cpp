@@ -27,16 +27,6 @@ void testProzess() // Erstellt einen neuen Prozess durch aufrufen einer cpp date
   // Fügt die PID in ein Vector hinzu
   pidVector.push_back(neuPr);
 }
-void neuesTerminal()
-{
-  pid_t neuPr = fork();
-  if (neuPr == 0)
-  {
-    execl("gnome-Terminal", args, (char *)NULL);
-  }
-
-  pidVector.push_back(neuPr);
-}
 // Methode zum auslesen der /proc/[PID]/stat
 string readstat(string procpath)
 {
