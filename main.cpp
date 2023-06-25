@@ -115,7 +115,7 @@ string printinfos()
 
     stat[i][1].length() < 8 ? stat[i][1] += "\t" : "";
 
-    alleInfos += stat[i][0] + "\t" + stat[i][1] + "\t" + to_string(getpid()) + "\t" + to_string(getuid()) + "\t" + stat[i][5] + "\t" + map[i][1] + "\t" + size[i] + "\t" + ram[i] + "\n";
+    alleInfos += stat[i][0] + "\t" + stat[i][1] + "\t" + stat[i][4] + "\t" + to_string(getuid()) + "\t" + stat[i][5] + "\t" + map[i][1] + "\t" + size[i] + "\t" + ram[i] + "\n";
   }
   // returned den string um später abgespeichert oder ausgegeben zu werden
   return alleInfos;
